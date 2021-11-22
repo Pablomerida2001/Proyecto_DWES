@@ -10,12 +10,12 @@
         }
 
         private function connect():void {
-            $url = "localhost";
+            $host = "localhost";
             $user = "root";
             $password = "";
             $dbname = "proyectophp";
 
-            $this->url = "mysql:dbname=$dbname;host=$url";
+            $this->url = "mysql:dbname=$dbname;host=$host";
             
             try{
                 $this->setDb(new PDO($this->url, $user, $password));                

@@ -6,14 +6,13 @@
 
     $user = $_SESSION["user"]??null;
     $username = $_SESSION["username"]??"";
+    $error = $_SESSION["loginError"]??false;
 
-    if($user != null && $_SESSION["succes"]??false){
-        header("Location: ../index.php");
+    if($user != null && !$error){
+        //header("Location: ../index.php");
     }
 
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +20,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/login.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Login</title>
 </head>
@@ -32,7 +32,7 @@
                 <div class="card bg-dark text-white" style="border-radius: 1rem;">
                 <div class="card-body p-5 text-center">
 
-                    <div class="mb-md-5 mt-md-4 pb-5">
+                    <div class="md-5 mt-md-4 pb-5">
 
                     <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
                     <p class="text-white-50 mb-5">Introduce tu nombre de usuario y la contraseña</p>
@@ -49,17 +49,19 @@
                             <input type="password" name="password" required class="form-control form-control-lg" />
                         </div>
                     
-                        <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="./recoverPwd.php">¿Has olvidado la contraseña?</a></p>
+                        <p class="small mb-2 pb-lg-2"><a class="text-white-50" href="./recoverPwd.php">¿Has olvidado la contraseña?</a></p>
 
-                        <button class="btn btn-outline-light btn-lg px-5" type="submit">Iniciar sesión</button>                
+                        <?php if($error){ ?>
+                            <p><a class="text-danger fw-bold">Usuario o contraseña incorrectos</a></p>
+                        <?php } ?>
+
+                        <button class="btn btn-outline-light btn-lg px-5 mb-5" type="submit">Iniciar sesión</button>     
+                        
+                        <div>
+                            <p class="mb-0 mt-0">¿No tienes cuenta? <a href="./register.php" class="text-white-50 fw-bold">Registrate</a></p>
+                        </div>
                     </form>
-
                     </div>
-
-                    <div>
-                        <p class="mb-0">¿No tienes cuenta? <a href="./register.php" class="text-white-50 fw-bold">Registrate</a></p>
-                    </div>
-
                 </div>
                 </div>
             </div>
