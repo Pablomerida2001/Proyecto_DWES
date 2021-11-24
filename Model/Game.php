@@ -81,11 +81,20 @@
             return self::gameFromArray($query->query($sql, [0 , 10]));
         }
 
-        public static function getAllGames():?Game {
+        public static function getAllGames():?array {
             $sql = "SELECT * FROM game";
             $query = new Query();
 
-            return self::gameFromArray($query->query($sql, [0 , 10]));
+            $result = $query->query($sql);
+            $games = [];
+            $i = 0;
+
+            foreach($result as $game){
+                $games[$i] = self::gameFromArray($game);
+                $i++;
+            }
+            
+            return $games;
         }
 
         public static function createGame($name, $description, $img):?Game {

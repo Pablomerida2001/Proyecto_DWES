@@ -10,6 +10,10 @@
 
     $games = Game::getAllGames();
 
+    $pag = $_GET["p"]??1 ;
+
+	//$total = ceil(Serie::totalShows()/MAX_ITEMS_PAGINA) ;
+
     //$user2 = User::createUser("test", "test@test.com", "1234");
 
     //$user = User::getUserByName("test");
@@ -117,7 +121,7 @@
     <div class="container mx-auto mt-3">		
 	<?php		
 
-        if (empty($datos)):
+        if (empty($games)):
         ?>
             <div class="alert alert-info">
                 No se han encontrado registros
@@ -125,38 +129,24 @@
         <?php
         else:
             $i = 0 ;
-            while($i < count($datos)):
+            while($i < count($games)):
                 $e = 0 ;
                 echo "<div class=\"row\">" ;
-                while (($i < count($datos)) and ($e < 10)):
+                while (($i < count($games)) and ($e < 10)):
         ?>
                 <div class="col-md-12 col-lg-4">
                     <div class="item card shadow m-2">
                         <div class="poster overflow-hidden">			 			
                             <img class="card-img-top" 
-                                src="<?= (is_null($datos[$i]->__get("img")))?"imgs/poster.jpg":$datos[$i]->__get("img") ?>" />
+                                src="<?= (is_null($games[$i]->__get("img")))?"imgs/poster.jpg":$games[$i]->__get("img") ?>" />
                         </div>
                         
                         <div class="card-body">
                             <div class="text-center">
-                                <h3><?= $datos[$i]->__get("name") ?></h3>
-                                <h5><?= $datos[$i]->__get("description") ?></h5>
+                                <h3><?= $games[$i]->__get("name") ?></h3>
                             </div>
                             
-                            <p class="text-truncate"><?= $datos[$i]->__get("description")?></p>
-
-                            <div class="row">
-                                <div class="col-sm-6 text-center">
-                                    <a href="editar.php?id=<?= $datos[$i]->idSer ?>">
-                                        <i class="bi bi-info-square"></i> Editar
-                                    </a>
-                                </div>
-                                <div class="col-sm-6 text-center">
-                                    <a href="borrar.php?id=<?= $datos[$i]->idSer ?>">
-                                        <i class="bi bi-eraser"></i> Borrar
-                                    </a>
-                                </div>
-                            </div>
+                            <p class="text"><?= $games[$i]->__get("description")?></p>
                         </div>
                     </div>	
                 </div>
@@ -173,11 +163,11 @@
                 <?php
                     // enlace a la página anterior
                     if ($pag == 1) echo "anterior |" ;
-                    else echo "<a href=\"main.php?p=".($pag-1)."\">anterior |</a>" ;
+                    else echo "<a href=\"index.php?p=".($pag-1)."\">anterior |</a>" ;
 
                     // enlace a la página siguiente
-                    if ($pag == $total) echo "siguiente" ;
-                    else echo "<a href=\"main.php?p=".($pag+1)."\">siguiente</a>" ;
+                    if ($pag*10 >= count($games)*10) echo "siguiente" ;
+                    else echo "<a href=\"index.php?p=".($pag+1)."\">siguiente</a>" ;
                 ?>						
             </div>
         <?php endif ; ?>
