@@ -85,7 +85,7 @@
             $sql = "SELECT * FROM game";
             $query = new Query();
 
-            $result = $query->query($sql);
+            $result = $query->queryMultiple($sql);
             $games = [];
             $i = 0;
 

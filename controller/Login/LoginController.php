@@ -16,12 +16,12 @@
             $succes = true;
             
             $_SESSION["loginError"] = false;
-            $_SESSION["user"] = serialize($user);
+            $_SESSION["user_id"] = $user->__get("user_id");
             $_SESSION["username"] = $username;
-        }else{
-            $_SESSION["loginError"] = true;
         }
-    }else{
+    }
+
+    if(!$succes){
         $_SESSION["loginError"] = true;
         $_SESSION["username"] = $username;
     }

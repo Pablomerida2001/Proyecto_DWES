@@ -5,19 +5,19 @@
     require_once "./controller/db/query.php";
 
     session_start();
+    //session_destroy();
 
-    $username = $_SESSION["username"]??"";
+    $user_id = $_SESSION["user_id"]??"";
+
+    if(isset($user_id)){
+        $user = User::getUserById($user_id);
+    }
 
     $games = Game::getAllGames();
 
     $pag = $_GET["p"]??1 ;
 
 	//$total = ceil(Serie::totalShows()/MAX_ITEMS_PAGINA) ;
-
-    //$user2 = User::createUser("test", "test@test.com", "1234");
-
-    //$user = User::getUserByName("test");
-    //if($user != null)echo $user->__get("user_id");
 ?>
 
 <!DOCTYPE html>
@@ -67,7 +67,7 @@
                 <i class="fas fa-shopping-cart"></i>
             </a>
 
-            <?php  if($username != "" && "a" == "b"){ ?>
+            <?php  if($user != null && "a" == "b"){ ?>
             <!-- Avatar -->
             <a
                 class="dropdown-toggle d-flex align-items-center hidden-arrow"
@@ -98,14 +98,17 @@
                 </li>
             </ul>
             </div>
+            <?php }elseif($user != null){?>
+                <a class="text-white"><?= $user->__get("userName")?></a>
+
             <?php }else{ ?>
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
                 <li class="nav-item px-2">
-                    <button type="button" name="login" id="loginButton" class="btn btn-success" data-toggle="modal" href="View/Login.php">Iniciar Sesión</button>  
+                    <a type="button" name="login" id="loginButton" class="btn btn-success" href="View/Login.php">Iniciar Sesión</a>  
                 </li>
                 <li class="nav-item px-2">
-                    <button type="button" name="login" id="registerButton" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">Registrate</button>  
+                    <a type="button" name="register" id="registerButton" class="btn btn-primary" href="View/register.php">Registrate</a>  
                 </li>
             </ul>
             <?php } ?>
