@@ -3,6 +3,7 @@
     require_once "./model/Game.php";
     require_once "./controller/db/query.php";
 
+    $dir = "./";
     session_start();
     //session_destroy();
 
@@ -64,7 +65,7 @@
                                 <a href="View/GameInfo.php?id=<?= $games[$i]->__get("game_id"); ?>"><h3><?= $games[$i]->__get("name") ?></h3></a>
                             </div>
                             
-                            <p class="text"><?= $games[$i]->__get("description")?></p>
+                            <p class="text-truncate"><?= $games[$i]->__get("description")?></p>
                         </div>
                     </div>	
                 </div>

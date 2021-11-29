@@ -8,6 +8,7 @@
         private String $name;
         private String $description;
         private String $img;
+        private ?String $releaseDate;
 
         public function emptyConstructor() {}
 
@@ -67,11 +68,11 @@
             return self::gameFromArray($query->query($sql, [$id]));
         }
 
-        public static function getGameByName($email):?Game {
+        public static function getGameByName($name):?Game {
             $sql = "SELECT * FROM game WHERE name = ?";
             $query = new Query();
 
-            return self::gameFromArray($query->query($sql, [$email]));
+            return self::gameFromArray($query->query($sql, [$name]));
         }
 
         public static function getGamesPaginated($page, $number):?Game {
@@ -97,16 +98,16 @@
             return $games;
         }
 
-        public static function createGame($name, $description, $img):?Game {
+        public static function createGame($name, $description, $img, $releaseDate = null):?Game {
             $game = null;
             $id = self::generateUUID();
 
             if(self::getGameByName($name) === null){
                 $query = new Query();
 
-                $sql = "INSERT INTO game VALUES(?, ?, ?, ?);";
+                $sql = "INSERT INTO game VALUES(?, ?, ?, ?, ?);";
 
-                $game = self::gameFromArray($query->query($sql, [$id, $name, $description, $img]));
+                $game = self::gameFromArray($query->query($sql, [$id, $name, $description, $img, $releaseDate]));
             }
             return $game;
         }
