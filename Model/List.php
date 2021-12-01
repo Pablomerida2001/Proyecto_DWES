@@ -86,7 +86,7 @@
             return $lists;
         }
 
-        public static function createList($name, $user_id):?Game {
+        public static function createList($name, $user_id):bool {
             $list = null;
             $id = self::generateUUID();
             $date = date("Y-m-d");
@@ -100,9 +100,10 @@
                 $sql2 = "INSERT INTO list VALUES(?, ?, ?, ?);";
 
                 $list = self::listFromArray($query->query($sql2, [$id, $name,$date, $user_id]));
+                return true;
             }
 
-            return $list;
+            return false;
         }
 
         public static function getGames($list_id){

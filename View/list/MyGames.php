@@ -26,6 +26,7 @@
 <?php require_once "../Header.php"?>
 <body class="bg-light">
     <div class="container mt-5">
+        <?php if(count($lists) != 0){?>
         <div class="row">
             <div class="col-lg-12">
                 <div class="main-box clearfix">
@@ -55,6 +56,9 @@
                 </div>
             </div>
         </div>
+        <?php }else{?>
+            <h5 class="text-center">No tienes ninguna lista creada todavía. <a href="./newList.php">Crear una ahora</a></h4>
+        <?php } ?>
     </div>
 </body>
 </html>
