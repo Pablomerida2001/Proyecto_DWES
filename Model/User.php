@@ -3,10 +3,10 @@
     require_once __DIR__."/../controller/db/query.php";
 
     class User{
-
         private String $user_id;
         private String $userName;
         private String $email;
+        private String $registerDate;
         private String $password;
 
         public function emptyConstructor() {}
@@ -85,15 +85,16 @@
         public static function createUser($userName, $email, $password):?User {
             $user = null;
             $id = self::generateUUID();
+            $date = date("Y-m-d");
 
             if(self::getUserByEmail($email) === null && self::getUserByName($userName) === null){
                 $query = new Query();
 
-                $sql = "INSERT INTO user VALUES(?, ?, ?, ?);";
+                $sql = "INSERT INTO user VALUES(?, ?, ?, ?, ?);";
 
                 $password = trim(password_hash($password, PASSWORD_BCRYPT));
 
-                $user = self::userFromArray($query->query($sql, [$id, $userName, $email, $password]));
+                $user = self::userFromArray($query->query($sql, [$id, $userName, $email, $date, $password]));
             }
             return $user;
         }
