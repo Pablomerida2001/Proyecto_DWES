@@ -14,7 +14,6 @@
 
         public function query($sql, $params = null){
             $statement = $this->db->prepare($sql);
-
             $params != null ? $statement->execute($params) : $statement->execute();
            
             return $statement->fetch(PDO::FETCH_ASSOC);

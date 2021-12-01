@@ -7,8 +7,9 @@
 
         private String $list_id;
         private String $name;
+        private ?String $creationDate;
         private String $user_id;
-        private static array $games = [];
+        private array $games = [];
 
         public function emptyConstructor() {}
 
@@ -55,6 +56,7 @@
                 foreach ($arr as $key => $value){
                     $list->__set($key, $value);
                 }
+                $list->__set("games", self::getGames($list->__get("list_id")));
                 return $list;
             }else{
                 return null;
@@ -87,16 +89,17 @@
         public static function createList($name, $user_id):?Game {
             $list = null;
             $id = self::generateUUID();
-
+            $date = date("Y-m-d");
+            
             $sql = "SELECT * FROM list WHERE user_id = ? AND name = ?";
             $query = new Query();
 
             $result = self::listFromArray($query->query($sql, [$user_id, $name]));
 
             if($result === null){
-                $sql2 = "INSERT INTO list VALUES(?, ?, ?);";
+                $sql2 = "INSERT INTO list VALUES(?, ?, ?, ?);";
 
-                $list = self::listFromArray($query->query($sql2, [$id, $name, $user_id]));
+                $list = self::listFromArray($query->query($sql2, [$id, $name,$date, $user_id]));
             }
 
             return $list;
@@ -108,13 +111,13 @@
 
             $result = $query->queryMultiple($sql, [$list_id]);
             $i = 0;
+            $games = [];
 
             foreach($result as $game){
-                $games[$i] = Game::getGameById($game);
+                $games[$i] = Game::getGameById($game["game_id"]);
                 $i++;
             }
-
-            self::$games = $games;
+            return $games;
         }
 
         public static function addGame($game_id, $list_id){
@@ -126,9 +129,7 @@
             if(empty($result)){
                 $sql = "INSERT INTO listgames VALUES(?, ?);";
 
-                $query->query($sql, [$list_id, $game_id]);
-                self::$games[count(self::$games)] = Game::getGameById($game_id);
-                
+                $query->query($sql, [$list_id, $game_id]);                
                 return true;
             }
 

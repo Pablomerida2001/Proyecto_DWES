@@ -29,5 +29,5 @@
         $_SESSION["email"] = $email;
     }
 
-    $succes ? header("Location: ../../index.php") : header("Location: ../../View/Register.php");
+    $succes ? header("Location: ../../index.php") : header("Location: ../../View/Login/Register.php");
 ?>

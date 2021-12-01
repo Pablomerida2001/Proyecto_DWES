@@ -27,7 +27,7 @@
                     <a class="nav-link" href="<?= $dir ?>">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= $dir ?>View/MyGames.php">Mis Juegos</a>
+                    <a class="nav-link" href="<?= $dir ?>View/list/MyGames.php">Mis Juegos</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Test</a>
@@ -55,10 +55,10 @@
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
                 <li class="nav-item px-2">
-                    <a type="button" name="login" id="loginButton" class="btn btn-success" href="<?= $dir ?>View/Login.php">Iniciar Sesión</a>  
+                    <a type="button" name="login" id="loginButton" class="btn btn-success" href="<?= $dir ?>View/Login/Login.php">Iniciar Sesión</a>  
                 </li>
                 <li class="nav-item px-2">
-                    <a type="button" name="register" id="registerButton" class="btn btn-primary" href="<?= $dir ?>View/register.php">Registrate</a>  
+                    <a type="button" name="register" id="registerButton" class="btn btn-primary" href="<?= $dir ?>View/Login/register.php">Registrate</a>  
                 </li>
             </ul>
             <?php } ?>

@@ -26,5 +26,5 @@
         $_SESSION["username"] = $username;
     }
 
-    $succes ? header("Location: ../../index.php") : header("Location: ../../View/Login.php");
+    $succes ? header("Location: ../../index.php") : header("Location: ../../View/Login/Login.php");
 ?>

@@ -1,9 +1,9 @@
 <?php
-    require_once "../Model/Game.php";
-    require_once "../Model/List.php";
-    require_once "../model/User.php";
+    require_once "../../Model/Game.php";
+    require_once "../../Model/List.php";
+    require_once "../../model/User.php";
 
-    $dir = "../";
+    $dir = "../../";
     session_start();
 
     $user_id = $_SESSION["user_id"]??"";
@@ -12,7 +12,7 @@
 
     $game = Game::getGameById($game_id);
 
-    if($_GET["s"]??false) echo "aaaaa";
+    if($_GET["s"]??false) echo "<script>window.alert(\"Juego añadido correctamente\");</script>";
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +27,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <title><?= $game!=null ? $game->__get("name") : "Juego no encontrado"?></title>
 </head>
-<?php require_once "./Header.php"?>
+<?php require_once "../Header.php"?>
 <body class="bg-light">
     <div class="container">
         <img class="img-fluid mt-3" src="<?= $game->__get("img") ?>"/> 
@@ -43,7 +43,7 @@
                         $lists = GamesList::getListsByUser($user_id);
                         foreach($lists as $list){
                             ?>
-                            <a class="dropdown-item" href="../controller/list/addToList.php?game=<?= $game_id?>&list=<?= $list->__get("list_id")?>"><?= $list->__get("name") ?></a>
+                            <a class="dropdown-item" href="../../controller/list/addToList.php?game=<?= $game_id?>&list=<?= $list->__get("list_id")?>"><?= $list->__get("name") ?></a>
                             <?php
                         }
                     ?>
@@ -59,7 +59,7 @@
         <?php if($game->__get("releaseDate") != null){
             ?>
             <h4 class="mt-5">Fecha de Salida</h4>
-            <p><?= $game->__get("releaseDate") ?></p>
+            <p><?= date_format(date_create($game->__get("releaseDate")), "d/m/Y"); ?></p>
         <?php
         }?>
     </div>

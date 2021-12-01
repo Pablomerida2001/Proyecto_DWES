@@ -14,9 +14,9 @@
     $game_id = $_GET["game"]??"";
     $list_id = $_GET["list"]??"";
 
-    GamesList::addGame($game_id, $list_id);
-
-    echo "ta bien";
-
-    header("Location: ../../View/Gameinfo.php?id=$game_id&s=true");
+    if(GamesList::addGame($game_id, $list_id)){
+        header("Location: ../../View/Games/Gameinfo.php?id=$game_id&s=true");
+    }else{
+        header("Location: ../../View/Games/Gameinfo.php?id=$game_id");
+    }    
 ?>

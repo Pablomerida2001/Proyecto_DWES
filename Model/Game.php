@@ -64,7 +64,7 @@
         public static function getGameById($id){
             $sql = "SELECT * FROM game WHERE game_id = ?";
             $query = new Query();
-
+            
             return self::gameFromArray($query->query($sql, [$id]));
         }
 
