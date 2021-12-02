@@ -59,7 +59,7 @@
                         
                         <div class="card-body">
                             <div class="text-center">
-                                <a href="View/GameInfo.php?id=<?= $games[$i]->__get("game_id"); ?>"><h3><?= $games[$i]->__get("name") ?></h3></a>
+                                <a href="View/Games/GameInfo.php?id=<?= $games[$i]->__get("game_id"); ?>"><h3><?= $games[$i]->__get("name") ?></h3></a>
                             </div>
                             
                             <p class="text-truncate"><?= $games[$i]->__get("description")?></p>
@@ -68,7 +68,8 @@
                 </div>
 
         <?php
-                    $i++; $e++ ;
+                $i++; 
+                $e++ ;
                 endwhile ;
                 echo "</div>" ;
             endwhile ;

@@ -47,7 +47,7 @@
                             <?php
                         }
                     ?>
-                    <a class="dropdown-item text-danger" href="#">Nueva lista</a>
+                    <a class="dropdown-item text-danger" href="../list/newList.php">Nueva lista</a>
                 </div>
             </div>
 
