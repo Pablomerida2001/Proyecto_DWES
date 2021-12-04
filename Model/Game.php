@@ -2,6 +2,7 @@
 
     require_once __DIR__."/../controller/db/query.php";
     require_once __DIR__."/Utils.php";
+    require_once __DIR__."/Genre.php";
 
     class Game{
 
@@ -10,6 +11,7 @@
         private String $description;
         private String $img;
         private ?String $releaseDate;
+        private ?array $genres = [];
 
         public function emptyConstructor() {}
 
