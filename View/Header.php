@@ -5,8 +5,6 @@
         $user = User::getUserById($user_id);
     }
 
-    $games = Game::getAllGames();
-
     $pag = $_GET["p"]??1 ;
 ?>
 
@@ -17,10 +15,6 @@
         <div class="container-fluid">
             <!-- Collapsible wrapper -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Navbar brand -->
-            <a class="navbar-brand mt-2 mt-lg-0" href="#">
-                <img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png" height="15" alt="logo" loading="lazy"/>
-            </a>
             <!-- Left links -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">

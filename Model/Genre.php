@@ -4,7 +4,6 @@
     require_once __DIR__."/Utils.php";
 
     class Genre{
-
         private String $genre_id;
         private String $name;
         private ?String $description;
@@ -46,33 +45,24 @@
             }
         }
 
-        public static function getListById($id){
+        public static function getGenreById($id){
             $sql = "SELECT * FROM genre WHERE genre_id = ?";
             $query = new Query();
 
             return self::genreFromArray($query->query($sql, [$id]));
         }
 
-        public static function getGenreByName($name):?array {
+        public static function getGenreByName($name):?Genre {
             $sql = "SELECT * FROM genre WHERE name = ?";
             $query = new Query();
 
-            $result = $query->queryMultiple($sql, [$name]);
-            $lists = [];
-            $i = 0;
-
-            foreach($result as $list){
-                $lists[$i] = self::genreFromArray($list);
-                $i++;
-            }
-
-            return $lists;
+            return self::genreFromArray($query->query($sql, [$name]));
         }
 
         public static function createGenre($name, $description = null):bool {
             $id = Utils::generateUUID();
             
-            $sql = "SELECT * FROM genere WHERE name = ?";
+            $sql = "SELECT * FROM genre WHERE name = ?";
             $query = new Query();
 
             $result = self::genreFromArray($query->query($sql, [$name]));

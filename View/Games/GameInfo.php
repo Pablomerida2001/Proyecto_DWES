@@ -30,7 +30,7 @@
 <?php require_once "../Header.php"?>
 <body class="bg-light">
     <div class="container">
-        <img class="img-fluid mt-3" src="<?= $game->__get("img") ?>"/> 
+        <img style="max-width: 50%" class="img-fluid mt-3" src="<?= $game->__get("img") ?>"/> 
 
         <div class="d-flex">
             <h1 class="mt-3"><?= $game->__get("name") ?></h1>
@@ -55,6 +55,13 @@
 
         <h4 class="mt-5">Descripción</h4>
         <p><?= $game->__get("description") ?></p>
+
+        <?php if($game->__get("genres") != null){?>
+            <h4 class="mt-5">Generos</h4>
+            <p><?php foreach($game->__get("genres") as $genre){?> 
+               <a href="Genre.php?id=<?= $genre->__get("genre_id");?>"><?= $genre->__get("name")?></a>, 
+            <?php } ?></p>
+        <?php }?>
 
         <?php if($game->__get("releaseDate") != null){
             ?>

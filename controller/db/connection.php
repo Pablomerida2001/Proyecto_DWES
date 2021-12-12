@@ -10,9 +10,9 @@
         }
 
         private function connect():void {
-            $host = "localhost";
+            $host = "192.168.1.39";
             $user = "root";
-            $password = "";
+            $password = "1234";
             $dbname = "proyectophp";
 
             $this->url = "mysql:dbname=$dbname;host=$host";

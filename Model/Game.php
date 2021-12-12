@@ -44,6 +44,7 @@
                 foreach ($arr as $key => $value){
                     $game->__set($key, $value);
                 }
+                $game->__set("genres", self::getGenres($game->__get("game_id")));
                 return $game;
             }else{
                 return null;
@@ -87,7 +88,7 @@
             return $games;
         }
 
-        public static function createGame($name, $description, $img, $releaseDate = null):?Game {
+        public static function createGame($name, $description, $img, $releaseDate):?Game {
             $game = null;
             $id = Utils::generateUUID();
 
@@ -99,6 +100,53 @@
                 $game = self::gameFromArray($query->query($sql, [$id, $name, $description, $img, $releaseDate]));
             }
             return $game;
+        }
+
+        public static function getGamesByGenre($genre_id):?array {
+            $sql = "SELECT game_id FROM gamegenres WHERE genre_id = ?";
+            $query = new Query();
+
+            $result = $query->queryMultiple($sql, [$genre_id]);
+            $games = [];
+            $i = 0;
+
+            foreach($result as $game){
+                $games[$i] = self::gameFromArray(self::getGameById($game["game_id"]));
+                $i++;
+            }
+            
+            return $games;
+        }
+
+        public static function getGenres($game_id){
+            $sql = "SELECT genre_id FROM gamegenres where game_id = ?";
+            $query = new Query();
+
+            $result = $query->queryMultiple($sql, [$game_id]);
+            $i = 0;
+            $genres = [];
+
+            foreach($result as $genre){
+                $genres[$i] = Genre::getGenreById($genre["genre_id"]);
+                $i++;
+            }
+            return $genres;
+        }
+
+        public static function addGenre($genre_id, $game_id){
+            $sql = "SELECT * FROM gamegenres WHERE genre_id = ? AND game_id = ?";
+            $query = new Query();
+
+            $result = $query->query($sql, [$genre_id, $game_id]);
+
+            if(empty($result)){
+                $sql = "INSERT INTO gamegenres VALUES(?, ?);";
+
+                $query->query($sql, [$game_id, $genre_id]);                
+                return true;
+            }
+
+            return false;
         }
     }
 

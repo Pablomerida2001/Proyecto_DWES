@@ -1,24 +1,19 @@
 <?php
-    require_once "./model/User.php";
-    require_once "./model/Game.php";
-    require_once "./model/Genre.php";
-    require_once "./controller/db/query.php";
+    require_once "../../Model/Game.php";
+    require_once "../../Model/Genre.php";
+    require_once "../../Model/List.php";
+    require_once "../../model/User.php";
 
-    //Genre::createGenre("RPG Games", "Role-playing games use protagonists as the leading figures in the occurring events. The player performs as a protagonist; his moves affect the setting and the possible outcome. Some RPGs are created in the form of trading card games; some relate to wargames. Except for the video RPGs, the genre is divided into two primary forms; the original tabletop role-playing, handled through discussion, and live-action role-playing, conducted through the characters' actions. Each of them has a game master who's in charge of the rules and settings. The video RPGs include sandboxes, like GTA; tactical games, like Dragonfall; and roguelikes, like Mystery Dungeon. Usually, the primary purpose is to save the world or other characters. That includes taking part in collaborative storytelling, fighting, collecting items and solving puzzles if needed. The plot tends to develop in a fantasy or science fiction universe.");
-    //Game::addGenre(Genre::getGenreByName("RPG Games")->__get("genre_id"), Game::getGameByName("The Witcher 3: Wild Hunt")->__get("game_id"));
-
-    $dir = "./";
+    $dir = "../../";
     session_start();
 
     $user_id = $_SESSION["user_id"]??"";
 
-    if(isset($user_id)){
-        $user = User::getUserById($user_id);
-    }
+    $genre_id = $_GET["id"];
 
-    $games = Game::getAllGames();
+    $genre = Genre::getGenreById($genre_id);
 
-    $pag = $_GET["p"]??1 ;
+    $games = Game::getGamesByGenre($genre_id);
 ?>
 
 <!DOCTYPE html>
@@ -31,15 +26,14 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <title>Inicio</title>
+    <title><?= $genre!=null ? $genre->__get("name") : "Categoría no encontrada  "?></title>
 </head>
-
-<?php require_once "View/Header.php"?>
-<body>
-
-    <div class="container mx-auto mt-3">		
+<?php require_once "../Header.php"?>
+<body class="bg-light">
+    <div class="container mx-auto mt-3">
+        <h1><?= $genre->__get("name");?></h1>		
+        <p class="mb-5"><?= $genre->__get("description")??"";?></p>
 	<?php		
-
         if (empty($games)):
         ?>
             <div class="alert alert-info">
@@ -62,7 +56,7 @@
                         
                         <div class="card-body">
                             <div class="text-center">
-                                <a href="View/Games/GameInfo.php?id=<?= $games[$i]->__get("game_id"); ?>"><h3><?= $games[$i]->__get("name") ?></h3></a>
+                                <a href="GameInfo.php?id=<?= $games[$i]->__get("game_id"); ?>"><h3><?= $games[$i]->__get("name") ?></h3></a>
                             </div>
                             
                             <p class="text-truncate"><?= $games[$i]->__get("description")?></p>
@@ -92,5 +86,6 @@
             </div>
         <?php endif ; ?>
 	</div>
+    
 </body>
 </html>

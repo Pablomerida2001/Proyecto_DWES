@@ -123,6 +123,32 @@
 
             return false;
         }
+
+        public static function removeGame($game_id, $list_id){
+            $sql = "SELECT * FROM listgames WHERE game_id = ? AND list_id = ?";
+            $query = new Query();
+
+            $result = $query->query($sql, [$game_id, $list_id]);
+
+            if(!empty($result)){
+                $sql = "DELETE FROM listgames WHERE list_id = ? AND game_id = ?;";
+
+                $query->query($sql, [$list_id, $game_id]);                
+                return true;
+            }
+
+            return false;
+        }
+
+        public static function delete($list_id){
+            $query = new Query();
+
+            $sql = "DELETE FROM listgames WHERE list_id = ?;";
+            $query->query($sql, [$list_id]);   
+
+            $sql = "DELETE FROM list WHERE list_id = ?;";
+            $query->query($sql, [$list_id]);         
+        }
     }
 
 ?>
