@@ -12,6 +12,7 @@
         private String $img;
         private ?String $releaseDate;
         private ?array $genres = [];
+        private ?String $score = " ";
 
         public function emptyConstructor() {}
 

@@ -1,7 +1,7 @@
 <?php
-    require_once "./model/User.php";
-    require_once "./model/Game.php";
-    require_once "./model/Genre.php";
+    require_once "./Model/User.php";
+    require_once "./Model/Game.php";
+    require_once "./Model/Genre.php";
     require_once "./controller/db/query.php";
 
     //Genre::createGenre("RPG Games", "Role-playing games use protagonists as the leading figures in the occurring events. The player performs as a protagonist; his moves affect the setting and the possible outcome. Some RPGs are created in the form of trading card games; some relate to wargames. Except for the video RPGs, the genre is divided into two primary forms; the original tabletop role-playing, handled through discussion, and live-action role-playing, conducted through the characters' actions. Each of them has a game master who's in charge of the rules and settings. The video RPGs include sandboxes, like GTA; tactical games, like Dragonfall; and roguelikes, like Mystery Dungeon. Usually, the primary purpose is to save the world or other characters. That includes taking part in collaborative storytelling, fighting, collecting items and solving puzzles if needed. The plot tends to develop in a fantasy or science fiction universe.");
@@ -47,11 +47,11 @@
             </div>
         <?php
         else:
-            $i = 0 ;
-            while($i < count($games)):
+            $i = 9 * ($pag - 1);
+            while($i < count($games) && $i < 9 * $pag):
                 $e = 0 ;
                 echo "<div class=\"row\">" ;
-                while (($i < count($games)) and ($e < 10)):
+                while (($i < count($games)) and ($e < 9)):
         ?>
                 <div class="col-md-12 col-lg-4">
                     <div class="item card shadow m-2">
@@ -86,7 +86,7 @@
                     else echo "<a href=\"index.php?p=".($pag-1)."\">anterior |</a>" ;
 
                     // enlace a la página siguiente
-                    if ($pag*10 >= count($games)*10) echo "siguiente" ;
+                    if ($pag*9 >= count($games)) echo "siguiente" ;
                     else echo "<a href=\"index.php?p=".($pag+1)."\">siguiente</a>" ;
                 ?>						
             </div>

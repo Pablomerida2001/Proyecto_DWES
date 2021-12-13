@@ -23,9 +23,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?= $dir ?>View/list/MyGames.php">Mis Juegos</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Test</a>
-                </li>
             </ul>
             <!-- Left links -->
             </div>
@@ -42,7 +39,7 @@
                     <a class="dropdown-toggle text-white" data-toggle="dropdown"><?= $user->__get("userName")?></a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item text-danger" href="<?= $dir ?>Controller/Login/Logout.php">Cerrar Sesión</a>
+                        <a class="dropdown-item text-danger" href="<?= $dir ?>controller/Login/Logout.php">Cerrar Sesión</a>
                     </div>
                 </div>
             <?php }else{ ?>

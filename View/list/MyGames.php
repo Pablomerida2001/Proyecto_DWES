@@ -1,7 +1,7 @@
 <?php
     require_once "../../Model/Game.php";
     require_once "../../Model/List.php";
-    require_once "../../model/User.php";
+    require_once "../../Model/User.php";
 
     $dir = "../../";
     session_start();

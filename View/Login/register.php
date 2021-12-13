@@ -24,7 +24,7 @@
     <title>Registrate</title>
 </head>
 <body>
-        <section class="gradient-custom">
+    <section class="vh-100 gradient-custom">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -52,7 +52,7 @@
                         </div>
 
                         <div class="form-outline form-white mb-5">
-                            <label class="form-label" for="password2">Repite la contraseñas</label>
+                            <label class="form-label" for="password2">Repite la contraseña</label>
                             <input type="password" name="password2" required class="form-control form-control-lg" />
                         </div>
 

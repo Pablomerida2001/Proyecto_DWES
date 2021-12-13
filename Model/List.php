@@ -94,7 +94,7 @@
         }
 
         public static function getGames($list_id){
-            $sql = "SELECT game_id FROM listgames where list_id = ?";
+            $sql = "SELECT game_id, score FROM listgames where list_id = ?";
             $query = new Query();
 
             $result = $query->queryMultiple($sql, [$list_id]);
@@ -103,6 +103,7 @@
 
             foreach($result as $game){
                 $games[$i] = Game::getGameById($game["game_id"]);
+                $games[$i]->__set("score",$game["score"]);
                 $i++;
             }
             return $games;
@@ -115,7 +116,7 @@
             $result = $query->query($sql, [$game_id, $list_id]);
 
             if(empty($result)){
-                $sql = "INSERT INTO listgames VALUES(?, ?);";
+                $sql = "INSERT INTO listgames VALUES(?, ?, '');";
 
                 $query->query($sql, [$list_id, $game_id]);                
                 return true;
@@ -148,6 +149,13 @@
 
             $sql = "DELETE FROM list WHERE list_id = ?;";
             $query->query($sql, [$list_id]);         
+        }
+
+        public function modifyScore($score, $game_id){
+            $query = new Query();
+
+            $sql = "UPDATE listgames SET score = ? WHERE list_id = ? AND game_id = ?;";
+            $query->query($sql, [$score, $this->__get("list_id"), $game_id]);   
         }
     }
 

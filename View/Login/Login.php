@@ -49,8 +49,6 @@
                             <input type="password" name="password" required class="form-control form-control-lg" />
                         </div>
                     
-                        <p class="small mb-2 pb-lg-2"><a class="text-white-50" href="./recoverPwd.php">¿Has olvidado la contraseña?</a></p>
-
                         <?php if($error){ ?>
                             <p><a class="text-danger fw-bold">Usuario o contraseña incorrectos</a></p>
                         <?php } ?>
