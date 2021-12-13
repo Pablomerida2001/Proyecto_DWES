@@ -3,10 +3,7 @@
     require_once "./Model/Game.php";
     require_once "./Model/Genre.php";
     require_once "./controller/db/query.php";
-
-    //Genre::createGenre("RPG Games", "Role-playing games use protagonists as the leading figures in the occurring events. The player performs as a protagonist; his moves affect the setting and the possible outcome. Some RPGs are created in the form of trading card games; some relate to wargames. Except for the video RPGs, the genre is divided into two primary forms; the original tabletop role-playing, handled through discussion, and live-action role-playing, conducted through the characters' actions. Each of them has a game master who's in charge of the rules and settings. The video RPGs include sandboxes, like GTA; tactical games, like Dragonfall; and roguelikes, like Mystery Dungeon. Usually, the primary purpose is to save the world or other characters. That includes taking part in collaborative storytelling, fighting, collecting items and solving puzzles if needed. The plot tends to develop in a fantasy or science fiction universe.");
-    Game::addGenre(Genre::getGenreByName("RPG")->__get("genre_id"), Game::getGameByName("Bloodborne")->__get("game_id"));
-
+    
     $dir = "./";
     session_start();
 
