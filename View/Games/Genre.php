@@ -2,7 +2,7 @@
     require_once "../../Model/Game.php";
     require_once "../../Model/Genre.php";
     require_once "../../Model/List.php";
-    require_once "../../model/User.php";
+    require_once "../../Model/User.php";
 
     $dir = "../../";
     session_start();
@@ -80,7 +80,7 @@
                     else echo "<a href=\"index.php?p=".($pag-1)."\">anterior |</a>" ;
 
                     // enlace a la página siguiente
-                    if ($pag*10 >= count($games)*10) echo "siguiente" ;
+                    if ($pag*9 >= count($games)) echo "siguiente" ;
                     else echo "<a href=\"index.php?p=".($pag+1)."\">siguiente</a>" ;
                 ?>						
             </div>

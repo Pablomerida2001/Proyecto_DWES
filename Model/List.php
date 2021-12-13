@@ -1,7 +1,7 @@
 <?php
 
     require_once __DIR__."/../controller/db/query.php";
-    require_once __DIR__."./Game.php";
+    require_once __DIR__."/Game.php";
     require_once __DIR__."/Utils.php";
 
     class GamesList{
